@@ -1,0 +1,26 @@
+server:
+  rootPath: /api
+  applicationConnectors:
+    - type: http
+      port: 8090
+  adminConnectors:
+    - type: http
+      port: 8091
+
+logging:
+  level: INFO
+  loggers:
+    pl.surreal: DEBUG
+  appenders:
+    - type: console
+    - type: file
+      threshold: INFO
+      logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
+      currentLogFilename: target/dropwizardsoap.log
+      archivedLogFilenamePattern: target/dropwizardsoap-%d{yyyy-MM-dd}-%i.log.gz
+      archivedFileCount: 4
+      timeZone: UTC
+      maxFileSize: 10MB
+
+metrics:
+  frequency: 10s
